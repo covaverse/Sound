@@ -1,182 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poker Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2e7d32;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .game-container {
-            width: 80%;
-            max-width: 800px;
-            background-color: #333;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card-hand {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .card {
-            width: 80px;
-            height: 120px;
-            margin: 0 10px;
-            border-radius: 10px;
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            font-size: 24px;
-        }
-
-        .actions {
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #1e88e5;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar Brand</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <div id="player-hand" class="card-hand">
-            <!-- ไพ่ผู้เล่นจะมาแสดงที่นี่ -->
-        </div>
-        <div id="dealer-hand" class="card-hand">
-            <!-- ไพ่เจ้ามือจะมาแสดงที่นี่ -->
-        </div>
-        <div class="actions">
-            <button id="deal-button">Deal</button>
-            <button id="reset-button">Reset</button>
-        </div>
-        <div id="stats">
-            <!-- สถิติผู้เล่นจะมาแสดงที่นี่ -->
-        </div>
-    </div>
-
-    <script>
-        const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-        const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-
-        let deck = [];
-
-        function createDeck() {
-            deck = [];
-            for (let suit of suits) {
-                for (let value of values) {
-                    deck.push({ value, suit });
-                }
-            }
-        }
-
-        function shuffleDeck() {
-            for (let i = deck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [deck[i], deck[j]] = [deck[j], deck[i]];
-            }
-        }
-
-        function dealCards() {
-            const playerHand = [deck.pop(), deck.pop()];
-            const dealerHand = [deck.pop(), deck.pop()];
-
-            displayHand('player-hand', playerHand);
-            displayHand('dealer-hand', dealerHand);
-
-            // สมมติว่าผู้เล่นชนะถ้ามีไพ่ที่มากกว่า
-            const playerValue = calculateHandValue(playerHand);
-            const dealerValue = calculateHandValue(dealerHand);
-            const playerWins = playerValue > dealerValue;
-            updateStats(playerWins);
-        }
-
-        function displayHand(elementId, hand) {
-            const handElement = document.getElementById(elementId);
-            handElement.innerHTML = '';
-            hand.forEach(card => {
-                const cardElement = document.createElement('div');
-                cardElement.classList.add('card');
-                cardElement.innerText = `${card.value} ${card.suit}`;
-                handElement.appendChild(cardElement);
-            });
-        }
-
-        function calculateHandValue(hand) {
-            return hand.reduce((acc, card) => acc + values.indexOf(card.value) + 2, 0);
-        }
-
-        let stats = {
-            gamesPlayed: 0,
-            gamesWon: 0,
-            gamesLost: 0
-        };
-
-        function loadStats() {
-            const savedStats = localStorage.getItem('pokerStats');
-            if (savedStats) {
-                stats = JSON.parse(savedStats);
-            }
-            displayStats();
-        }
-
-        function saveStats() {
-            localStorage.setItem('pokerStats', JSON.stringify(stats));
-        }
-
-        function displayStats() {
-            const statsElement = document.getElementById('stats');
-            statsElement.innerHTML = `
-                <p>Games Played: ${stats.gamesPlayed}</p>
-                <p>Games Won: ${stats.gamesWon}</p>
-                <p>Games Lost: ${stats.gamesLost}</p>
-            `;
-        }
-
-        function updateStats(won) {
-            stats.gamesPlayed++;
-            if (won) {
-                stats.gamesWon++;
-            } else {
-                stats.gamesLost++;
-            }
-            saveStats();
-            displayStats();
-        }
-
-        document.getElementById('deal-button').addEventListener('click', () => {
-            createDeck();
-            shuffleDeck();
-            dealCards();
-        });
-
-        document.getElementById('reset-button').addEventListener('click', () => {
-            stats = { gamesPlayed: 0, gamesWon: 0, gamesLost: 0 };
-            saveStats();
-            displayStats();
-        });
-
-        loadStats();
-    </script>
+  
+<audio controls autoplay>
+  <source src="https://raw.githubusercontent.com/Covaverse/Sound/main/LOBBY-1-Edit-D.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<nav class="navbar">
+    <a href="#" class="navbar-brand">Brand</a>
+</nav>
 </body>
 </html>
